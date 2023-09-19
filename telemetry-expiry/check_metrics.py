@@ -146,13 +146,13 @@ def create_probe_lists(metrics, prefix=''):
 
 def generate_payload(name_project, expired_already, expiring_soon):
     
-    payload = "["
-    p_expired = ""
-    p_expiring = ""
+    payload = "[]"
+    #p_expired = ""
+    #p_expiring = ""
 
     # payload section: already expired
-    if expired_already:
-        p_expired+= '{ "type": "divider" }, { "type": "section", "text": { "type": "mrkdwn", "text": "*ALREADY EXPIRED* :traffic-red:" } },'
+    #if expired_already:
+        #p_expired+= '{ "type": "divider" }, { "type": "section", "text": { "type": "mrkdwn", "text": "*ALREADY EXPIRED* :traffic-red:" } },'
 
         #for item in expired_already:
         #    name_probe = output_format(item[0])
@@ -183,7 +183,7 @@ def generate_payload(name_project, expired_already, expiring_soon):
     #    payload += '{ "type": "divider" }, { "type": "section", "text": { "type": "mrkdwn", "text": "*NONE EXPIRING* :traffic-green:" } },'
 
     # payload footer
-    payload += '{ "type": "divider" }, { "type": "context", "elements": [ { "type": "mrkdwn", "text": ":testops-notify: created by <https://mozilla-hub.atlassian.net/wiki/spaces/MTE/overview|Mobile Test Engineering>" } ] } ]'
+    #payload += '{ "type": "divider" }, { "type": "context", "elements": [ { "type": "mrkdwn", "text": ":testops-notify: created by <https://mozilla-hub.atlassian.net/wiki/spaces/MTE/overview|Mobile Test Engineering>" } ] } ]'
 
     with open(PAYLOAD_JSON, 'w') as f:
         f.write(payload)
