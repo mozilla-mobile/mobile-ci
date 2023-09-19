@@ -24,6 +24,11 @@ jobs:
 
       - name: Run telemetry probe expiry check 
         run: ls -la
+    
+      - uses: actions/upload-artifact@v3
+        with:
+          name: slack-payload
+          path: "./slack-payload.json"
 
       - name: Demo Slack Message
         id: slack
