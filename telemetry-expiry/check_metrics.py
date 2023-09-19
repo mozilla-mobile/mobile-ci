@@ -154,33 +154,33 @@ def generate_payload(name_project, expired_already, expiring_soon):
     if expired_already:
         p_expired+= '{ "type": "divider" }, { "type": "section", "text": { "type": "mrkdwn", "text": "*ALREADY EXPIRED* :traffic-red:" } },'
 
-        for item in expired_already:
-            name_probe = output_format(item[0])
-            date_expire = item[1] 
-            days = item[2]
-            p_expired += output_json_row(name_probe, date_expire, days)
+        #for item in expired_already:
+        #    name_probe = output_format(item[0])
+        #    date_expire = item[1] 
+        #    days = item[2]
+        #    p_expired += output_json_row(name_probe, date_expire, days)
 
     # payload section: expiring soon 
-    if expiring_soon:
-        payload += '{ "type": "divider" }, { "type": "section", "text": { "type": "mrkdwn", "text": "*EXPIRING SOON* :traffic-yellow:" } },'
+    #if expiring_soon:
+    #    payload += '{ "type": "divider" }, { "type": "section", "text": { "type": "mrkdwn", "text": "*EXPIRING SOON* :traffic-yellow:" } },'
 
-        for item in expiring_soon:
-            name_probe = output_format(item[0])
-            date_expire = item[1] 
-            days = soon_expiring(item[1], warn_threshold_days=WARN_THRESHOLD_DAYS)
-            p_expiring += output_json_row(name_probe, date_expire, days)
+    #    for item in expiring_soon:
+    #        name_probe = output_format(item[0])
+    #        date_expire = item[1] 
+    #        days = soon_expiring(item[1], warn_threshold_days=WARN_THRESHOLD_DAYS)
+    #        p_expiring += output_json_row(name_probe, date_expire, days)
 
 
     # payload header
-    payload += '{ "blocks": [ { "type": "header", "text": { "type": "plain_text", "text": "telemetry probe expiry: '
-    payload += name_project
-    payload += ' :firefox: " } },'
+    #payload += '{ "blocks": [ { "type": "header", "text": { "type": "plain_text", "text": "telemetry probe expiry: '
+    #payload += name_project
+    #payload += ' :firefox: " } },'
 
-    if p_expired or p_expiring:
-       payload += p_expired
-       payload += p_expiring
-    else:
-        payload += '{ "type": "divider" }, { "type": "section", "text": { "type": "mrkdwn", "text": "*NONE EXPIRING* :traffic-green:" } },'
+    #if p_expired or p_expiring:
+    #   payload += p_expired
+    #   payload += p_expiring
+    #else:
+    #    payload += '{ "type": "divider" }, { "type": "section", "text": { "type": "mrkdwn", "text": "*NONE EXPIRING* :traffic-green:" } },'
 
     # payload footer
     payload += '{ "type": "divider" }, { "type": "context", "elements": [ { "type": "mrkdwn", "text": ":testops-notify: created by <https://mozilla-hub.atlassian.net/wiki/spaces/MTE/overview|Mobile Test Engineering>" } ] } ] }'
