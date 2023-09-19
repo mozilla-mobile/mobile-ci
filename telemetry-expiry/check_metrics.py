@@ -146,7 +146,7 @@ def create_probe_lists(metrics, prefix=''):
 
 def generate_payload(name_project, expired_already, expiring_soon):
     
-    payload = "{["
+    payload = "["
     p_expired = ""
     p_expiring = ""
 
@@ -183,7 +183,7 @@ def generate_payload(name_project, expired_already, expiring_soon):
     #    payload += '{ "type": "divider" }, { "type": "section", "text": { "type": "mrkdwn", "text": "*NONE EXPIRING* :traffic-green:" } },'
 
     # payload footer
-    payload += '{ "type": "divider" }, { "type": "context", "elements": [ { "type": "mrkdwn", "text": ":testops-notify: created by <https://mozilla-hub.atlassian.net/wiki/spaces/MTE/overview|Mobile Test Engineering>" } ] } ] }'
+    payload += '{ "type": "divider" }, { "type": "context", "elements": [ { "type": "mrkdwn", "text": ":testops-notify: created by <https://mozilla-hub.atlassian.net/wiki/spaces/MTE/overview|Mobile Test Engineering>" } ] } ]'
 
     with open(PAYLOAD_JSON, 'w') as f:
         f.write(payload)
