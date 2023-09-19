@@ -146,7 +146,7 @@ def create_probe_lists(metrics, prefix=''):
 
 def generate_payload(name_project, expired_already, expiring_soon):
     
-    payload = ""
+    payload = "{["
     p_expired = ""
     p_expiring = ""
 
