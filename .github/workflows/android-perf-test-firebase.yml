@@ -1,0 +1,42 @@
+name: Android Performance Tests in Firebase
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    # Authenticate with Google Cloud
+    - name: Authenticate with Google Cloud
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+    
+    # Set up Cloud SDK
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+    
+    # Download APKs from GCP bucket
+    - name: Download APKs
+      run: |
+        gsutil cp gs://android_perf_test/browser-perf-test.apk ./browser-perf-test.apk
+        gsutil cp gs://android_perf_test/com.termux-1000.apk ./termux.apk
+    
+    # Install Firebase CLI
+    - name: Install Firebase CLI
+      run: |
+        curl -sL https://firebase.tools | bash
+    
+    # Run tests in Firebase Test Lab
+    - name: Run Wireless Debug Test in Firebase Test Lab
+      run: |
+        firebase test android run \
+          --app browser-perf-test.apk \
+          --additional-apks termux.apk \
+          --test-targets "class com.example.browserperftest.WirelessDebugTest" \
+          --device model=e3q,version=34,locale=en_US,orientation=portrait \
+          --timeout 30m
